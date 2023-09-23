@@ -38,7 +38,7 @@ const { palette } = ImageData; // Used with `buildSVG``
 */
 
 export const useFetchNounImage = () => {
-    const [nextNounId, setNextNounId] = useState(16);
+    const [nextNounId, setNextNounId] = useState(1);
     const [latestBlockHash, setLatestBlockHash] = useState('0x5014101691e81d79a2eba711e698118e1a90c9be7acb2f40d7f200134ee53e01');
     const [seed, setSeed] = useState<NounSeed>(
         {
@@ -90,6 +90,7 @@ export const useFetchNounImage = () => {
     return {
         svgBase64,
         setNextNounId,
+        nextNounId,
         setLatestBlockHash,
         generateRandomNoun,
         setSeed,

@@ -13,7 +13,7 @@ const CHAIN_ID = 31337;
 const Marketplace: NextPage = () => {
   const { address } = useAccount();
 
-  const { generateRandomNoun, svgBase64 } = useFetchNounImage();
+  const { generateRandomNoun, svgBase64, nextNounId } = useFetchNounImage();
 
   const [selectedNFT, setSelectNFT] = useState(-1);
 
@@ -32,7 +32,7 @@ const Marketplace: NextPage = () => {
   const { writeAsync: mintNFT } = useScaffoldContractWrite({
     contractName: "FoodNFT",
     functionName: "mintChef",
-    args: [address, "URL"],
+    args: [address, nextNounId.toString()],
     onBlockConfirmation: txnReceipt => {
       console.log("📦 Transaction blockHash", txnReceipt.blockHash);
     },
@@ -76,10 +76,11 @@ const Marketplace: NextPage = () => {
               <div
                 key={index}
                 className="w-20 h-20 border border-gray-30 flex items-center justify-center font-bold mr-2 mb-2 cursor-pointer"
-                style={{ background: selectedNFT === index ? "#00cc99" : "white" }}
+                style={{ background: selectedNFT === index ? "#00cc99" : "" }}
                 onClick={() => setSelectNFT(index)}
               >
-                <Image className="" src="/assets/chef.png" width={50} height={50} alt="Chef" />
+                {/* <Image className="" src="/assets/chef.png" width={50} height={50} alt="Chef" /> */}
+                {n.id + " : " + n.tokenURI}
               </div>
             ))}
           </div>
