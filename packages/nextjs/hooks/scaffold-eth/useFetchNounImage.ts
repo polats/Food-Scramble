@@ -1,9 +1,18 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ImageData, getNounSeedFromBlockHash, getNounData } from '@nouns/assets';
 import { buildSVG } from '@nouns/sdk';
+import { NounSeed } from '@nouns/assets/dist/types';
 const { palette } = ImageData; // Used with `buildSVG``
 
 /** 
+ * OUTPUT:
+   {
+      background: 1,
+      body: 28,
+      accessory: 120,
+      head: 95,
+      glasses: 15
+    }
  * OUTPUT:
    {
      parts: [
@@ -29,21 +38,38 @@ const { palette } = ImageData; // Used with `buildSVG``
 */
 
 export const useFetchNounImage = () => {
-    const [seed, setSeed] = useState('');
+    const [nextNounId, setNextNounId] = useState(16);
+    const [latestBlockHash, setLatestBlockHash] = useState('0x5014101691e81d79a2eba711e698118e1a90c9be7acb2f40d7f200134ee53e01');
+    const [seed, setSeed] = useState<NounSeed>(
+        {
+            background: 1,
+            body: 28,
+            accessory: 120,
+            head: 95,
+            glasses: 15
+          }        
+    );    
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<Error | null>(null);
     const [svgBase64, setSvgBase64] = useState('');
   
+
+    const generateRandomNoun = () => {
+        const newSeed = Math.floor(Math.random() * 1000000000);
+        setNextNounId(newSeed);
+    }
+    
     const fetchNounsImage = useCallback(async () => {
         setIsLoading(true);
         setError(null);
     
         try {
 
-        const latestBlockHash = '0x5014101691e81d79a2eba711e698118e1a90c9be7acb2f40d7f200134ee53e01';
-        const nextNounId = 116;
-        const seed = getNounSeedFromBlockHash(nextNounId, latestBlockHash);
-        const { parts, background } = getNounData(seed);
+        // const latestBlockHash = '0x5014101691e81d79a2eba711e698118e1a90c9be7acb2f40d7f200134ee53e01';
+        // const nextNounId = 16;
+        const newSeed = getNounSeedFromBlockHash(nextNounId, latestBlockHash);
+        
+        const { parts, background } = getNounData(newSeed);
         const svgBinary = buildSVG(parts, palette, background);
         const converted_svgBase64 = btoa(svgBinary);
 
@@ -53,7 +79,7 @@ export const useFetchNounImage = () => {
           setError(err instanceof Error ? err : new Error("An error occurred."));
         }
         setIsLoading(false);
-      }, [seed]);
+      }, [latestBlockHash, nextNounId]);
     
     
 
@@ -63,6 +89,9 @@ export const useFetchNounImage = () => {
 
     return {
         svgBase64,
+        setNextNounId,
+        setLatestBlockHash,
+        generateRandomNoun,
         setSeed,
         isLoading,
         error,

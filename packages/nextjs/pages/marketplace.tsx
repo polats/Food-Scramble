@@ -3,14 +3,17 @@ import Image from "next/image";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { MetaHeader } from "~~/components/MetaHeader";
-import RandomNounsImage from "~~/components/RandomNounsImage";
+import SvgImage from "~~/components/SvgImage";
 import deployedContracts from "~~/generated/deployedContracts";
 import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+import { useFetchNounImage } from "~~/hooks/scaffold-eth";
 
 const CHAIN_ID = 31337;
 
 const Marketplace: NextPage = () => {
   const { address } = useAccount();
+
+  const { generateRandomNoun, svgBase64 } = useFetchNounImage();
 
   const [selectedNFT, setSelectNFT] = useState(-1);
 
@@ -92,7 +95,17 @@ const Marketplace: NextPage = () => {
             <span className="block text-2xl mb-2">Mint an NFT</span>
           </h1>
 
-          <RandomNounsImage/>
+            <div className="ml-20">
+            <SvgImage src={svgBase64} />
+            </div>
+
+          <button
+            className="py-2 px-16 mb-1 mt-6 ml-52 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+            onClick={() => generateRandomNoun()}
+          >
+            Randomize
+          </button>
+
 
           <Image className="ml-60" src="/assets/chef.png" width={80} height={80} alt="Chef" />
 
