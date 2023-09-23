@@ -14,6 +14,9 @@ import { publicProvider } from "wagmi/providers/public";
 import scaffoldConfig from "~~/scaffold.config";
 import { burnerWalletConfig } from "~~/services/web3/wagmi-burner/burnerWalletConfig";
 import { getTargetNetwork } from "~~/utils/scaffold-eth";
+import { rainbowMagicConnector } from "./RainbowMagicConnector";
+
+
 
 const configuredNetwork = getTargetNetwork();
 const { onlyLocalBurnerWallet } = scaffoldConfig;
@@ -46,6 +49,7 @@ export const appChains = configureChains(
 
 const walletsOptions = { chains: appChains.chains, projectId: scaffoldConfig.walletConnectProjectId };
 const wallets = [
+  rainbowMagicConnector({ ...walletsOptions }),
   metaMaskWallet({ ...walletsOptions, shimDisconnect: true }),
   walletConnectWallet(walletsOptions),
   ledgerWallet(walletsOptions),

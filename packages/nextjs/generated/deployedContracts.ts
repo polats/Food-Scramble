@@ -924,7 +924,7 @@ const contracts = {
           ],
         },
         FoodNFT: {
-          address: "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
+          address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
           abi: [
             {
               inputs: [],
@@ -1427,7 +1427,7 @@ const contracts = {
           ],
         },
         FoodScramble: {
-          address: "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
+          address: "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
           abi: [
             {
               inputs: [
