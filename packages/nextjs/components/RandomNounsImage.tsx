@@ -8,13 +8,13 @@ const RandomNounsImage = () => {
   }, []);
 
   const fetchRandomImage = async () => {
-    const url = 'https://source.unsplash.com/random';
+    const url = 'https://api.cloudnouns.com/v1/pfp';
     const response = await fetch(url);
     setImageUrl(response.url);
   };
 
   return (
-    <div>
+    <div style={{ width: '200px', height: '200px', overflow: 'hidden' }}>
       {imageUrl && <img src={imageUrl} alt="Random from Unsplash" />}
     </div>
   );
