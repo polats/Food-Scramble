@@ -11,7 +11,7 @@ const Home: NextPage = () => {
         <div className="px-5">
           <h1 className="text-center mb-8">
             <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Food Scramble</span>
+            <span className="block text-4xl font-bold">Press Start</span>
           </h1>
           <Image className="ml-14" alt="Game" width={400} height={400} src="/assets/game.png" />
           <p className="text-center text-lg">Collect ingredients, combine them, and create unique food NFTs </p>

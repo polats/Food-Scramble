@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { MetaHeader } from "~~/components/MetaHeader";
+import RandomNounsImage from "~~/components/RandomNounsImage";
 import deployedContracts from "~~/generated/deployedContracts";
 import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
@@ -88,8 +89,10 @@ const Marketplace: NextPage = () => {
             Create Token Bound Account
           </button>
           <h1 className="text-center mb-5">
-            <span className="block text-2xl mb-2">Buy a NFT</span>
+            <span className="block text-2xl mb-2">Mint an NFT</span>
           </h1>
+
+          <RandomNounsImage/>
 
           <Image className="ml-60" src="/assets/chef.png" width={80} height={80} alt="Chef" />
 
