@@ -9,7 +9,7 @@ import deployedContracts from "~~/generated/deployedContracts";
 import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 import { useFetchNounImage } from "~~/hooks/scaffold-eth";
 
-const CHAIN_ID = 31337;
+const CHAIN_ID = 84531;
 
 const Marketplace: NextPage = () => {
   const { address } = useAccount();
