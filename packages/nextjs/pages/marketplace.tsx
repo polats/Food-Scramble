@@ -4,6 +4,7 @@ import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { MetaHeader } from "~~/components/MetaHeader";
 import SvgImage from "~~/components/SvgImage";
+import MintedNFTImage from "~~/components/MintedNFTImage";
 import deployedContracts from "~~/generated/deployedContracts";
 import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 import { useFetchNounImage } from "~~/hooks/scaffold-eth";
@@ -80,7 +81,8 @@ const Marketplace: NextPage = () => {
                 onClick={() => setSelectNFT(index)}
               >
                 {/* <Image className="" src="/assets/chef.png" width={50} height={50} alt="Chef" /> */}
-                {n.id + " : " + n.tokenURI}
+                {/* {n.id + " : " + n.tokenURI} */}
+                <MintedNFTImage seed={n.tokenURI} />
               </div>
             ))}
           </div>

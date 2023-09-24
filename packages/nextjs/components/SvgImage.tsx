@@ -1,4 +1,4 @@
-const RandomNounsImage = ({ src } : any) => {
+const SvgImage = ({ src } : any) => {
 
   return (
 <section className="hero container max-w-screen-lg mx-auto pb-10">
@@ -10,4 +10,4 @@ const RandomNounsImage = ({ src } : any) => {
   );
 };
 
-export default RandomNounsImage;
+export default SvgImage;
