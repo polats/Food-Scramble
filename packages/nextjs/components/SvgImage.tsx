@@ -1,11 +1,12 @@
 const RandomNounsImage = ({ src } : any) => {
 
   return (
-    <div style={{ width: '200px', height: '200px', overflow: 'hidden' }}>
+<section className="hero container max-w-screen-lg mx-auto pb-10">
       {
-        src && <img src={"data:image/svg+xml;base64," + src} />
+        src && <img src={"data:image/svg+xml;base64," + src} className="mx-auto"/>
       }
-    </div>
+</section>    
+
   );
 };
 
