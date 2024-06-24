@@ -42,6 +42,10 @@ const config: HardhatUserConfig = {
         enabled: process.env.MAINNET_FORKING_ENABLED === "true",
       },
     },
+    scrollSepolia: {
+      url: `https://rpc.ankr.com/scroll_sepolia_testnet`,
+      accounts: [deployerPrivateKey],
+    },
     mainnet: {
       url: `https://eth-mainnet.alchemyapi.io/v2/${providerApiKey}`,
       accounts: [deployerPrivateKey],

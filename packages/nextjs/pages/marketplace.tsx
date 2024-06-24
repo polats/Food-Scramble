@@ -4,11 +4,12 @@ import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { MetaHeader } from "~~/components/MetaHeader";
 import SvgImage from "~~/components/SvgImage";
+import MintedNFTImage from "~~/components/MintedNFTImage";
 import deployedContracts from "~~/generated/deployedContracts";
 import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 import { useFetchNounImage } from "~~/hooks/scaffold-eth";
 
-const CHAIN_ID = 31337;
+const CHAIN_ID = 84531;
 
 const Marketplace: NextPage = () => {
   const { address } = useAccount();
@@ -55,6 +56,15 @@ const Marketplace: NextPage = () => {
     },
   });
 
+  const viewTBA = () => {
+    const chainName = "goerli";
+    const url = "https://tokenbound.org/assets/" + chainName + "/" + 
+      deployedContracts[CHAIN_ID][0].contracts.FoodNFT.address + "/" + selectedNFT;
+
+      const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+      if (newWindow) newWindow.opener = null
+  }
+
   return (
     <>
       <MetaHeader
@@ -80,18 +90,28 @@ const Marketplace: NextPage = () => {
                 onClick={() => setSelectNFT(index)}
               >
                 {/* <Image className="" src="/assets/chef.png" width={50} height={50} alt="Chef" /> */}
-                {n.id + " : " + n.tokenURI}
+                {/* {n.id + " : " + n.tokenURI} */}
+                <MintedNFTImage seed={n.tokenURI} />
               </div>
             ))}
           </div>
 
           <button
-            className="py-2 px-16 mb-10 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+            className="w-60 py-2 px-16 mb-10 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
             onClick={() => createAccount()}
             disabled={nfts?.length === 0 || selectedNFT === -1}
           >
             Create Token Bound Account
           </button>
+
+          <button
+            className="w-60 py-2 px-16 mb-1 mt-6 ml-52 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+            onClick={() => viewTBA()}
+          >
+            View TBA
+          </button>
+
+
           <h1 className="text-center mb-5">
             <span className="block text-2xl mb-2">Mint an NFT</span>
           </h1>
